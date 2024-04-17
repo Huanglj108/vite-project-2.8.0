@@ -2,5 +2,16 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
+import Antd from 'ant-design-vue'
+import * as Icons from '@ant-design/icons-vue'
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App)
+
+app.use(router).use(Antd)
+app.mount('#app')
+
+// 全局使用图标，遍历yinru
+const icons: any = Icons
+for(const i in icons) {
+  app.component(i,icons[i]);
+}

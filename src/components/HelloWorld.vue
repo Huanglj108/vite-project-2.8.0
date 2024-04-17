@@ -1,52 +1,31 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
-defineProps<{ msg: string }>()
-
-const count = ref(0)
+import { ref } from 'vue';
+import type { CSSProperties } from 'vue';
+const value = ref('horizontal');
+const baseStyle: CSSProperties = {
+  width: '25%',
+  height: '54px',
+};
 </script>
 
 <template>
-  <h1>{{ msg }}----</h1>
-
-  <p>
-    Recommended IDE setup:
-    <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
-    +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-  </p>
-
-  <p>See <code>README.md</code> for more information.</p>
-
-  <p>
-    <a href="https://vitejs.dev/guide/features.html" target="_blank">
-      Vite Docs
-    </a>
-    |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
-  </p>
-
-  <button type="button" @click="count++">count is: {{ count }}</button>
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
-  </p>
+  <div>
+    <a-flex gap="middle" vertical>
+    <a-radio-group v-model:value="value">
+      <a-radio value="horizontal">horizontal</a-radio>
+      <a-radio value="vertical">vertical</a-radio>
+    </a-radio-group>
+    <a-flex :vertical="value === 'vertical'">
+      <div
+        v-for="(item, index) in new Array(4)"
+        :key="item"
+        :style="{ ...baseStyle, background: `${index % 2 ? '#1677ff' : '#1677ffbf'}` }"
+      />
+    </a-flex>
+  </a-flex>
+  </div>
 </template>
 
 <style scoped>
-a {
-  color: #42b983;
-}
 
-label {
-  margin: 0 0.5em;
-  font-weight: bold;
-}
-
-code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
-}
 </style>
