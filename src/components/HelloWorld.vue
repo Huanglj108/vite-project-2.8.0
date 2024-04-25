@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
+import { useCounterStore } from '@/store/user'
+
+const store = useCounterStore()
+console.log(store)
+
+const { name, age, sex } = store
+
 const justifyOptions = reactive([
   'flex-start',
   'center',
@@ -21,6 +28,7 @@ const boxStyle = {
 
 <template>
   <div>
+    <div>{{ name }}{{ age }}{{ sex }}</div>
     <a-flex gap="middle" align="start" vertical>
     <p>Select justify :</p>
     <a-segmented v-model:value="justify" :options="justifyOptions" />
