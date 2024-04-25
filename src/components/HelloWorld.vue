@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import { useCounterStore } from '@/store/user'
+import { useUserStore } from '@/store/user'
+import { storeToRefs } from 'pinia';
 
-const store = useCounterStore()
+const store = useUserStore()
 console.log(store)
+store.updateNameSync('同步')
 
-const { name, age, sex } = store
+store.updateName('异步')
+
+const { name, age, sex } = storeToRefs(store)
 
 const justifyOptions = reactive([
   'flex-start',
